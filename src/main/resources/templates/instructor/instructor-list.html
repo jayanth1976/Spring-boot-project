@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://kit.fontawesome.com/b6fd831f4f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}"/>
+    <title>Instructor</title>
+</head>
+<body>
+<div class="wrapper">
+    <h1 class="heading">Faculty Manager</h1>
+    <div class="table-content">
+        <table>
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Action</th>
+                <th>Courses</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="eachInstructor : ${instructors}">
+                <td th:text="${eachInstructor.firstName}"/>
+                <td th:text="${eachInstructor.lastName}"/>
+                <td th:text="${eachInstructor.email}"/>
+                <td>
+                    <a th:href="@{/instructors/showFormForUpdate(instructorId=${eachInstructor.id})}">
+                        <i class="fa-solid fa-pen" title="update"></i> |
+                    </a>
+                    <a th:href="@{/instructors/delete(instructorId=${eachInstructor.id})}"
+                       onclick="if (!(confirm('Are you sure you want to delete this Instructor?'))) return false"
+                    >
+                        <i class="fa-sharp fa-solid fa-trash" title="Delete instructor"></i>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/courses/add(instructorId=${eachInstructor.id})}"
+                    >
+                        <i class="fa-solid fa-plus" title="Add course"></i> |
+                    </a>
+                    <a th:href="@{/courses/list(instructorId=${eachInstructor.id})}"
+                    >
+                        <i class="fa-solid fa-book" title="View Courses"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="list-buttons">
+            <button class="btn" onClick="window.location.href='showFormForAdd';return false;">Add Instructor
+            </button>
+            <a class="btn" th:href="@{/courses/allCourses}">View all courses
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

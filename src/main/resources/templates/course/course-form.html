@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}">
+
+    <title>Course</title>
+</head>
+<body>
+<div class="form">
+    <p class="main-title">Add course</p>
+    <form action="#" th:action="@{/courses/save(instructorId=${instructorId})}"
+          th:object="${course}" method="POST" id="msform">
+        <fieldset>
+            <input type="hidden" th:field="*{id}" />
+            <p th:if="${#fields.hasErrors('title')}"
+               th:errors="*{title}"
+               class="error"></p>
+            <input
+                    type="text"
+                    th:field="*{title}"
+                    placeholder="Course title"
+            />
+            <input
+                    type="submit"
+                    class="next action-button"
+                    value="Save"
+            />
+        </fieldset>
+    </form>
+    <button class="btn"
+            onClick="window.location.href='/instructors/list';return false;">Back to
+        Instructor list
+    </button>
+</div>
+</body>
+</html>

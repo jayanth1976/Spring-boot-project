@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://kit.fontawesome.com/b6fd831f4f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}"/>
+    <title>Courses</title>
+</head>
+<body>
+<div class="wrapper">
+    <h1 class="heading">Faculty Manager</h1>
+    <div class="table-content">
+        <table>
+            <thead>
+            <tr>
+                <th>Courses teached by <span th:text="${name}"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="coursesEach : ${courses}">
+                <td th:text="${coursesEach.title}"/>
+            </tr>
+            </tbody>
+        </table>
+        <button class="btn"
+                onClick="window.location.href='/instructors/list';return false;">Back to
+            Instructor list
+        </button>
+    </div>
+</div>
+</body>
+</html>
