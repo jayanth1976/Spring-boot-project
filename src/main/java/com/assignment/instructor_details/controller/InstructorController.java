@@ -18,12 +18,6 @@ public class InstructorController {
     @Autowired
     InstructorService instructorService;
 
-    @GetMapping("/welcome")
-    public String greet(Model theModel) {
-        theModel.addAttribute("theDate", new java.util.Date());
-        return "greet";
-    }
-
     @GetMapping("/list")
     public String findAll(Model theModel) {
         List<Instructor> theInstructors = instructorService.findAll();
@@ -52,20 +46,15 @@ public class InstructorController {
 
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
-
-        // create model attribute to bind form data
         Instructor theInstructor = new Instructor();
 
         theModel.addAttribute("instructor", theInstructor);
 
         return "instructor/instructor-form";
     }
-
     @GetMapping("/delete")
     public String deleteInstructor(@RequestParam("instructorId") int theId) {
         instructorService.deleteById(theId);
         return "redirect:/instructors/list";
     }
-
-
 }

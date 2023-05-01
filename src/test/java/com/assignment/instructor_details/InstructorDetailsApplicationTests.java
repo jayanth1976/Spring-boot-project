@@ -1,13 +1,17 @@
 package com.assignment.instructor_details;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 @SpringBootTest
-class InstructorDetailsApplicationTests {
+public class InstructorDetailsApplicationTests {
 
 	@Test
-	void contextLoads() {
-	}
+	public void contextLoads() {
+		InstructorDetailsApplication application = new InstructorDetailsApplication();
+		assertNotNull(application);	}
 
 }

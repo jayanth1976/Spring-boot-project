@@ -26,7 +26,8 @@ public class CourseController {
     public String saveCourse(@ModelAttribute("course") @Valid Course theCourse, BindingResult bindingResult, @RequestParam("instructorId") int theId){
         if (bindingResult.hasErrors()) {
             return "redirect:/courses/add?instructorId="+theId;
-        } else {
+        }
+        else {
             Instructor theInstructor = instructorService.findById(theId);
             theInstructor.add(theCourse);
             courseService.save(theCourse);

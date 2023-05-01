@@ -27,12 +27,9 @@ public class InstructorServiceImpl implements InstructorService{
             instructor = result.get();
         }
         else {
-            // we didn't find the employee
             throw new RuntimeException("Did not find instructor id - " + theId);
         }
-
         return instructor;
-
     }
 
     @Override
