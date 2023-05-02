@@ -1,11 +1,13 @@
 package com.assignment.instructor_details.entity;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.Rule;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +15,23 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
+
 public class InstructorTest {
+
+    @Rule
+    public MockitoRule mockitoRule= MockitoJUnit.rule();
+
+    @BeforeEach
+    public void setup() throws Exception{
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Mock
     Course course;
+
+
+
+
 
 //    Instructor instructor = new Instructor();
     @InjectMocks
@@ -94,5 +107,32 @@ public class InstructorTest {
         assertEquals(course, courses.get(0));
     }
 
+    @Test
+    public void testAddCourseNull(){
+        Course course = new Course();
+
+        // Act
+        instructor.add(course);
+
+        // Assert
+        assertNotNull(instructor.getCourses());
+        assertEquals(1, instructor.getCourses().size());
+        assertEquals(course, instructor.getCourses().get(0));
+    }
+
+    @Test
+    public void testAddCourse(){
+        Course course1 = new Course();
+        Course course2 = new Course();
+
+        // Act
+        instructor.add(course1);
+        instructor.add(course2);
+
+        // Assert
+        assertNotNull(instructor.getCourses());
+        assertEquals(2, instructor.getCourses().size());
+        assertEquals(course2, instructor.getCourses().get(1));
+    }
 
 }

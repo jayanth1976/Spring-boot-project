@@ -41,6 +41,7 @@ public class Instructor {
 
         if (courses == null) {
             courses = new ArrayList<>();
+            System.out.println("yes");
         }
 
         courses.add(tempCourse);

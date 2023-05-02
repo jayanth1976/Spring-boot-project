@@ -18,6 +18,8 @@ public class InstructorController {
     @Autowired
     InstructorService instructorService;
 
+    String instructorFormView = "instructor/instructor-form";
+
     @GetMapping("/list")
     public String findAll(Model theModel) {
         List<Instructor> theInstructors = instructorService.findAll();

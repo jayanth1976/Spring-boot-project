@@ -1,13 +1,25 @@
 package com.assignment.instructor_details.entity;
 
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CourseTest {
 
+    @Rule
+    public MockitoRule mockitoRule= MockitoJUnit.rule();
+
+    @BeforeEach
+    public void setup() throws Exception{
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Mock
     Instructor instructor;
