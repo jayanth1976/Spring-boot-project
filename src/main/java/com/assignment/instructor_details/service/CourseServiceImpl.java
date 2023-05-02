@@ -25,5 +25,8 @@ public class CourseServiceImpl implements CourseService{
         courseRepository.save(theCourse);
     }
 
-
+    @Override
+    public void deleteById(int theId) {
+        courseRepository.deleteById(theId);
+    }
 }

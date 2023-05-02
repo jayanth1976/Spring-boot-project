@@ -58,6 +58,9 @@ public class CourseController {
         theModel.addAttribute("allCourses",theCourses);
         return "course/all-courses";
     }
-
-
+    @GetMapping("/delete")
+    public String deleteCourse(@RequestParam("courseId") int theId) {
+        courseService.deleteById(theId);
+        return "redirect:/courses/allCourses";
+    }
 }

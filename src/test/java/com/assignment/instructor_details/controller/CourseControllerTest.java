@@ -112,5 +112,15 @@ public class CourseControllerTest {
         assertEquals("course/all-courses",view);
     }
 
+    @Test
+    public void testDeleteCourse() {
+        int courseId = 1;
+
+        String view = courseController.deleteCourse(courseId);
+
+        verify(courseService, times(1)).deleteById(courseId);
+        assertEquals("redirect:/courses/allCourses", view);
+    }
+
 
 }

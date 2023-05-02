@@ -102,3 +102,7 @@
     font-size:12px;
     text-align:left;
     }
+    .save{
+    width:8rem !important;
+    border-radius:2rem !important;
+    }

@@ -49,4 +49,13 @@ public class CourseServiceImplTest {
         verify(courseRepository).save(theCourse);
     }
 
+    @Test
+    public void testDeleteById() {
+        int courseId = 1;
+
+        courseServiceImpl.deleteById(courseId);
+
+        verify(courseRepository, times(1)).deleteById(courseId);
+    }
+
 }
