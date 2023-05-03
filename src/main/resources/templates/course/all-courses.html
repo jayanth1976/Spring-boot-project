@@ -28,7 +28,10 @@
                     <a th:href="@{/courses/delete(courseId=${coursesEach.id})}"
                        onclick="if (!(confirm('Are you sure you want to delete this Instructor?'))) return false"
                     >
-                        <i class="fa-sharp fa-solid fa-trash" title="Delete instructor"></i>
+                        <i class="fa-sharp fa-solid fa-trash" title="Delete instructor"></i> |
+                    </a>
+                    <a th:href="@{/courses/showFormForUpdate(courseId=${coursesEach.id},instructorId=${coursesEach.instructor.id})}">
+                        <i class="fa-solid fa-pen" title="update"></i>
                     </a>
                 </td>
             </tr>

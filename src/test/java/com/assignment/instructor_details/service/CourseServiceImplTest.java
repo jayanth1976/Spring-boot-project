@@ -5,17 +5,15 @@ import com.assignment.instructor_details.entity.Course;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -68,5 +66,27 @@ class CourseServiceImplTest {
 
         verify(courseRepository, times(1)).deleteById(courseId);
     }
+    @Test
+    void testFindById() {
+        Course course = new Course();
+        when(courseRepository.findById(1)).thenReturn(Optional.of(course));
+
+        Course result = courseServiceImpl.findById(1);
+
+        verify(courseRepository).findById(1);
+        assertEquals(course, result);
+    }
+
+    @Test
+    void testFindByIdThrowsException() {
+        when(courseRepository.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(RuntimeException.class, () -> {
+            courseServiceImpl.findById(1);
+        });
+
+        verify(courseRepository).findById(1);
+    }
+
 
 }

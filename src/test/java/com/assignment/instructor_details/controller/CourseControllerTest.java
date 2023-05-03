@@ -8,7 +8,6 @@ import com.assignment.instructor_details.service.InstructorService;
 import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -67,12 +66,12 @@ class CourseControllerTest {
     }
 
     @Test
-    void testSaveCourseWithoutErrors(){
+    void testSaveCourseWithoutValidation(){
         int theId = 7;
         when(bindingResult.hasErrors()).thenReturn(false);
         when(instructorService.findById(theId)).thenReturn(instructor);
 
-        String result = courseController.saveCourse(course, bindingResult, theId);
+        String result = courseController.saveCourse(course, bindingResult, theId,theModel);
 
         assertEquals("redirect:/courses/allCourses",result);
         verify(instructor).add(course);
@@ -81,13 +80,13 @@ class CourseControllerTest {
     }
 
     @Test
-    void testSaveCourseWithErrors(){
+    void testSaveCourseWithValidation(){
         int theId = 7;
         when(bindingResult.hasErrors()).thenReturn(true);
 
-        String result = courseController.saveCourse(course, bindingResult, theId);
+        String result = courseController.saveCourse(course, bindingResult, theId,theModel);
 
-        assertEquals("redirect:/courses/add?instructorId="+theId,result);
+        assertEquals("course/course-form",result);
         verify(instructor,never()).add(course);
         verify(courseService,never()).save(course);
     }
@@ -119,6 +118,20 @@ class CourseControllerTest {
 
         verify(theModel).addAttribute("allCourses",theCourses);
         assertEquals("course/all-courses",view);
+    }
+
+    @Test
+    void testUpdate(){
+        int instructorId = 13;
+        int courseId = 2;
+        when(courseService.findById(anyInt())).thenReturn(course);
+
+        String view = courseController.update(instructorId, courseId, theModel);
+
+        verify(courseService).findById(courseId);
+        verify(theModel).addAttribute("course", course);
+        verify(theModel).addAttribute("instructorId", instructorId);
+        assertEquals("course/course-form", view);
     }
 
     @Test

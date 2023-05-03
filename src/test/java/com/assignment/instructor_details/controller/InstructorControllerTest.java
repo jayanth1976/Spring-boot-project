@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 
@@ -64,7 +63,7 @@ class InstructorControllerTest {
     }
 
     @Test
-    void saveInstructorWithoutError() {
+    void saveInstructorWithoutValidation() {
         when(bindingResult.hasErrors()).thenReturn(false);
 
         String view = instructorController.saveInstructor(instructor,bindingResult);
@@ -73,7 +72,7 @@ class InstructorControllerTest {
     }
 
     @Test
-    void saveInstructorWithError() {
+    void saveInstructorWithValidation() {
         when(bindingResult.hasErrors()).thenReturn(true);
 
         String view = instructorController.saveInstructor(instructor,bindingResult);

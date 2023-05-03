@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService{
@@ -16,6 +17,25 @@ public class CourseServiceImpl implements CourseService{
     @Override
     public List<Course> findAll() {
         return courseRepository.findAll();
+    }
+
+    public static class CourseNotFoundException extends RuntimeException {
+        public CourseNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    @Override
+    public Course findById(int theId) {
+        Optional<Course> result =  courseRepository.findById(theId);
+        Course course = null;
+        if (result.isPresent()) {
+            course = result.get();
+        }
+        else {
+            throw new CourseNotFoundException("Cannot find course with id - " + theId);
+        }
+        return course;
     }
 
     @Override

@@ -22,10 +22,13 @@ public class CourseController {
     @Autowired
     CourseService courseService;
 
+    String courseFormView = "course/course-form";
+
     @PostMapping("/save")
-    public String saveCourse(@ModelAttribute("course") @Valid Course theCourse, BindingResult bindingResult, @RequestParam("instructorId") int theId){
+    public String saveCourse(@ModelAttribute("course") @Valid Course theCourse, BindingResult bindingResult, @RequestParam("instructorId") int theId,Model theModel){
         if (bindingResult.hasErrors()) {
-            return "redirect:/courses/add?instructorId="+theId;
+            theModel.addAttribute("instructorId",theId);
+            return courseFormView;
         }
         else {
             Instructor theInstructor = instructorService.findById(theId);
@@ -40,7 +43,15 @@ public class CourseController {
         Course theCourse = new Course();
         theModel.addAttribute("course",theCourse);
         theModel.addAttribute("instructorId",theId);
-        return "course/course-form";
+        return courseFormView;
+    }
+
+    @GetMapping("/showFormForUpdate")
+    public String update(@RequestParam("instructorId") int instructorId,@RequestParam("courseId") int courseId, Model theModel) {
+        Course theCourse = courseService.findById(courseId);
+        theModel.addAttribute("course", theCourse);
+        theModel.addAttribute("instructorId",instructorId);
+        return courseFormView;
     }
 
     @GetMapping("/list")

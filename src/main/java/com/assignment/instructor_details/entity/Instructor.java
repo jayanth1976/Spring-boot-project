@@ -30,7 +30,7 @@ public class Instructor {
 
     @NotEmpty(message="*email is required")
     @Column(name="email")
-    @Email(message = "*should enter valid email")
+    @ValidEmail
     private String email;
 
     @OneToMany(mappedBy="instructor",

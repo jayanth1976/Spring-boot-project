@@ -103,20 +103,18 @@ class InstructorTest {
     }
 
     @Test
-    void testAddCourseNull(){
+    void testAddCourseWithNullList(){
         Course course = new Course();
 
-        // Act
         instructor.add(course);
 
-        // Assert
         assertNotNull(instructor.getCourses());
         assertEquals(1, instructor.getCourses().size());
         assertEquals(course, instructor.getCourses().get(0));
     }
 
     @Test
-    void testAddCourse(){
+    void testAddCourseWithoutNullList(){
         Course course1 = new Course();
         Course course2 = new Course();
 
