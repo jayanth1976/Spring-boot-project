@@ -6,15 +6,11 @@ import com.assignment.instructor_details.service.InstructorService;
 import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 

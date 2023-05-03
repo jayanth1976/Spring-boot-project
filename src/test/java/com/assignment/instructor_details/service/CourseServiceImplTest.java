@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class CourseServiceImplTest {
+class CourseServiceImplTest {
     @Rule
     public MockitoRule mockitoRule= MockitoJUnit.rule();
 
@@ -36,7 +36,7 @@ public class CourseServiceImplTest {
     private CourseServiceImpl courseServiceImpl;
 
     @Test
-    public void testFindAll() {
+    void testFindAll() {
         Course course1 = new Course();
         Course course2 = new Course();
         List<Course> courses = new ArrayList<>();
@@ -54,14 +54,14 @@ public class CourseServiceImplTest {
     }
 
     @Test
-    public void testSaveCourse() {
+    void testSaveCourse() {
         Course theCourse = new Course();
         courseServiceImpl.save(theCourse);
         verify(courseRepository).save(theCourse);
     }
 
     @Test
-    public void testDeleteById() {
+    void testDeleteById() {
         int courseId = 1;
 
         courseServiceImpl.deleteById(courseId);

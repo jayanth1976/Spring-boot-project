@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface CourseService {
     public List<Course> findAll();
-//
-//    public Instructor findById(int theId);
 
     public void save(Course theCourse);
 

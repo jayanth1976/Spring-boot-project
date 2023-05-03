@@ -1,9 +1,7 @@
 package com.assignment.instructor_details.service;
 
 import com.assignment.instructor_details.dao.CourseRepository;
-import com.assignment.instructor_details.dao.InstructorRepository;
 import com.assignment.instructor_details.entity.Course;
-import com.assignment.instructor_details.entity.Instructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

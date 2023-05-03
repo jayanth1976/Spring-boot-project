@@ -13,10 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
 
 
-public class InstructorTest {
+class InstructorTest {
 
     @Rule
     public MockitoRule mockitoRule= MockitoJUnit.rule();
@@ -30,28 +29,24 @@ public class InstructorTest {
     Course course;
 
 
-
-
-
-//    Instructor instructor = new Instructor();
     @InjectMocks
     Instructor instructor;
 
     @Test
-    public void testAllArgsConstructor() {
+    void testAllArgsConstructor() {
         List<Course> expectedCourses = new ArrayList<>();
         expectedCourses.add(new Course());
         expectedCourses.add(new Course());
         Instructor instructor1 = new Instructor(1, "Joe", "Dane", "joeDane@gmail.com", expectedCourses);
-        assertEquals(instructor1.getId(), 1);
-        assertEquals(instructor1.getFirstName(), "Joe");
-        assertEquals(instructor1.getLastName(), "Dane");
-        assertEquals(instructor1.getEmail(), "joeDane@gmail.com");
+        assertEquals(1,instructor1.getId());
+        assertEquals("Joe",instructor1.getFirstName());
+        assertEquals("Dane",instructor1.getLastName());
+        assertEquals("joeDane@gmail.com",instructor1.getEmail());
         assertEquals(instructor1.getCourses(), expectedCourses);
     }
 
     @Test
-    public void testId() {
+    void testId() {
         int expectedId = 123;
         instructor.setId(expectedId);
         int actualId = instructor.getId();
@@ -59,7 +54,7 @@ public class InstructorTest {
     }
 
     @Test
-    public void testFirstName() {
+    void testFirstName() {
         String expectedFirstName = "John";
         instructor.setFirstName(expectedFirstName);
         String actualFirstName = instructor.getFirstName();
@@ -67,7 +62,7 @@ public class InstructorTest {
     }
 
     @Test
-    public void testLastName() {
+    void testLastName() {
         String expectedLastName = "Doe";
         instructor.setLastName(expectedLastName);
         String actualLastName = instructor.getLastName();
@@ -75,7 +70,7 @@ public class InstructorTest {
     }
 
     @Test
-    public void testEmail() {
+    void testEmail() {
         String expectedEmail = "johndoe@example.com";
         instructor.setEmail(expectedEmail);
         String actualEmail = instructor.getEmail();
@@ -83,18 +78,18 @@ public class InstructorTest {
     }
 
     @Test
-    public void testCourses() {
+    void testCourses() {
         List<Course> expectedCourses = new ArrayList<>();
         expectedCourses.add(new Course());
         expectedCourses.add(new Course());
         instructor.setCourses(expectedCourses);
         List<Course> actualCourses = instructor.getCourses();
         assertNotNull(actualCourses);
-        assertTrue(actualCourses.size() == 2);
+        assertEquals(2,actualCourses.size());
     }
 
     @Test
-    public void testAdd() {
+    void testAdd() {
 
         Course course = new Course();
         course.setId(1);
@@ -108,7 +103,7 @@ public class InstructorTest {
     }
 
     @Test
-    public void testAddCourseNull(){
+    void testAddCourseNull(){
         Course course = new Course();
 
         // Act
@@ -121,7 +116,7 @@ public class InstructorTest {
     }
 
     @Test
-    public void testAddCourse(){
+    void testAddCourse(){
         Course course1 = new Course();
         Course course2 = new Course();
 

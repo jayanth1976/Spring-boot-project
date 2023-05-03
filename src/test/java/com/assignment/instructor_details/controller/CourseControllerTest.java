@@ -13,9 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -28,7 +26,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class CourseControllerTest {
+class CourseControllerTest {
     @Rule
     public MockitoRule mockitoRule= MockitoJUnit.rule();
 
@@ -59,43 +57,43 @@ public class CourseControllerTest {
     }
 
     @Test
-    public void testAddCourse() {
+    void testAddCourse() {
         int theId = 1;
         System.out.println(theModel);
         String result = courseController.addCourse(theModel, theId);
         assertEquals("course/course-form", result);
         verify(theModel).addAttribute(eq("course"), any(Course.class));
-        verify(theModel).addAttribute(eq("instructorId"), eq(theId));
+        verify(theModel).addAttribute("instructorId", theId);
     }
 
     @Test
-    public void testSaveCourseWithoutErrors(){
+    void testSaveCourseWithoutErrors(){
         int theId = 7;
         when(bindingResult.hasErrors()).thenReturn(false);
-        when(instructorService.findById(eq(theId))).thenReturn(instructor);
+        when(instructorService.findById(theId)).thenReturn(instructor);
 
         String result = courseController.saveCourse(course, bindingResult, theId);
 
         assertEquals("redirect:/courses/allCourses",result);
-        verify(instructor).add(eq(course));
+        verify(instructor).add(course);
         verify(courseService).save(course);
 
     }
 
     @Test
-    public void testSaveCourseWithErrors(){
+    void testSaveCourseWithErrors(){
         int theId = 7;
         when(bindingResult.hasErrors()).thenReturn(true);
 
         String result = courseController.saveCourse(course, bindingResult, theId);
 
         assertEquals("redirect:/courses/add?instructorId="+theId,result);
-        verify(instructor,never()).add(eq(course));
+        verify(instructor,never()).add(course);
         verify(courseService,never()).save(course);
     }
 
     @Test
-    public void testInstructorCourseList(){
+    void testInstructorCourseList(){
         int theId = 1;
         when(instructorService.findById(theId)).thenReturn(instructor);
         String result = courseController.instructorCourseList(theModel,theId);
@@ -111,7 +109,7 @@ public class CourseControllerTest {
     }
 
     @Test
-    public void testGetAllCourses(){
+    void testGetAllCourses(){
         List<Course> theCourses = new ArrayList<>();
         theCourses.add(new Course());
         theCourses.add(new Course());
@@ -124,7 +122,7 @@ public class CourseControllerTest {
     }
 
     @Test
-    public void testDeleteCourse() {
+    void testDeleteCourse() {
         int courseId = 1;
 
         String view = courseController.deleteCourse(courseId);

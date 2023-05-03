@@ -11,6 +11,12 @@ import java.util.Optional;
 @Service
 public class InstructorServiceImpl implements InstructorService{
 
+    public static class InstructorNotFoundException extends RuntimeException {
+        public InstructorNotFoundException(String message) {
+            super(message);
+        }
+    }
+
     @Autowired
     InstructorRepository instructorRepository;
 
@@ -27,7 +33,7 @@ public class InstructorServiceImpl implements InstructorService{
             instructor = result.get();
         }
         else {
-            throw new RuntimeException("Did not find instructor id - " + theId);
+            throw new InstructorNotFoundException("Did not find instructor id - " + theId);
         }
         return instructor;
     }

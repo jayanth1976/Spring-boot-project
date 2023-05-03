@@ -32,7 +32,7 @@ public class InstructorController {
     public String saveInstructor(@ModelAttribute("instructor") @Valid Instructor theInstructor, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "instructor/instructor-form";
+            return instructorFormView;
         } else {
             instructorService.save(theInstructor);
             return "redirect:/instructors/list";
@@ -43,7 +43,7 @@ public class InstructorController {
     public String update(@RequestParam("instructorId") int theId, Model theModel) {
         Instructor theInstructor = instructorService.findById(theId);
         theModel.addAttribute("instructor", theInstructor);
-        return "instructor/instructor-form";
+        return instructorFormView;
     }
 
     @GetMapping("/showFormForAdd")
@@ -52,7 +52,7 @@ public class InstructorController {
 
         theModel.addAttribute("instructor", theInstructor);
 
-        return "instructor/instructor-form";
+        return instructorFormView;
     }
     @GetMapping("/delete")
     public String deleteInstructor(@RequestParam("instructorId") int theId) {

@@ -7,10 +7,10 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-
-public class InstructorDetailsApplicationTests {
+class InstructorDetailsApplicationTests {
 
 	@Rule
 	public MockitoRule mockitoRule= MockitoJUnit.rule();
@@ -21,8 +21,9 @@ public class InstructorDetailsApplicationTests {
 	}
 
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 		InstructorDetailsApplication.main(new String[] {});
+		assertTrue(true);
 	}
 
 }

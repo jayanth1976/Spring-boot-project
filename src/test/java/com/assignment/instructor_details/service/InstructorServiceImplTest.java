@@ -24,7 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
-public class InstructorServiceImplTest {
+class InstructorServiceImplTest {
 
     @Rule
     public MockitoRule mockitoRule= MockitoJUnit.rule();
@@ -41,7 +41,7 @@ public class InstructorServiceImplTest {
     private InstructorServiceImpl instructorServiceImpl;
 
     @Test
-    public void findAll() {
+    void findAll() {
         List<Instructor> instructors = new ArrayList<>();
         instructors.add(new Instructor());
         instructors.add(new Instructor());
@@ -56,7 +56,7 @@ public class InstructorServiceImplTest {
     }
 
     @Test
-    public void testFindById() {
+    void testFindById() {
         Instructor instructor = new Instructor();
         when(instructorRepository.findById(1)).thenReturn(Optional.of(instructor));
 
@@ -67,7 +67,7 @@ public class InstructorServiceImplTest {
     }
 
     @Test
-    public void testFindByIdThrowsException() {
+    void testFindByIdThrowsException() {
         when(instructorRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(RuntimeException.class, () -> {
@@ -78,7 +78,7 @@ public class InstructorServiceImplTest {
     }
 
     @Test
-    public void save() {
+    void save() {
         Instructor instructorToSave = new Instructor();
         instructorToSave.setFirstName("John");
         instructorToSave.setLastName("Doe");
@@ -90,7 +90,7 @@ public class InstructorServiceImplTest {
     }
 
     @Test
-    public void deleteById() {
+    void deleteById() {
         int instructorIdToDelete = 1;
 
         instructorServiceImpl.deleteById(instructorIdToDelete);
