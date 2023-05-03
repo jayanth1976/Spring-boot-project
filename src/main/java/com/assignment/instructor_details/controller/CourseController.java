@@ -25,7 +25,7 @@ public class CourseController {
     String courseFormView = "course/course-form";
 
     @PostMapping("/save")
-    public String saveCourse(@ModelAttribute("course") @Valid Course theCourse, BindingResult bindingResult, @RequestParam("instructorId") int theId,Model theModel){
+    public String saveCourse(@ModelAttribute("course") @Valid Course theCourse, BindingResult bindingResult, @RequestParam("instructorId") String theId,Model theModel){
         if (bindingResult.hasErrors()) {
             theModel.addAttribute("instructorId",theId);
             return courseFormView;
@@ -47,7 +47,7 @@ public class CourseController {
     }
 
     @GetMapping("/showFormForUpdate")
-    public String update(@RequestParam("instructorId") int instructorId,@RequestParam("courseId") int courseId, Model theModel) {
+    public String update(@RequestParam("instructorId") int instructorId,@RequestParam("courseId") String courseId, Model theModel) {
         Course theCourse = courseService.findById(courseId);
         theModel.addAttribute("course", theCourse);
         theModel.addAttribute("instructorId",instructorId);
@@ -55,7 +55,7 @@ public class CourseController {
     }
 
     @GetMapping("/list")
-    public String instructorCourseList(Model theModel,@RequestParam("instructorId") int theId){
+    public String instructorCourseList(Model theModel,@RequestParam("instructorId") String theId){
         Instructor instructor = instructorService.findById(theId);
         List<Course> theCourses = instructor.getCourses();
         theModel.addAttribute("courses",theCourses);

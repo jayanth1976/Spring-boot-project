@@ -2,6 +2,8 @@ package com.assignment.instructor_details.service;
 
 import com.assignment.instructor_details.dao.InstructorRepository;
 import com.assignment.instructor_details.entity.Instructor;
+import com.assignment.instructor_details.error_handling.CourseNotFoundException;
+import com.assignment.instructor_details.error_handling.InstructorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,7 @@ import java.util.Optional;
 @Service
 public class InstructorServiceImpl implements InstructorService{
 
-    public static class InstructorNotFoundException extends RuntimeException {
-        public InstructorNotFoundException(String message) {
-            super(message);
-        }
-    }
+
 
     @Autowired
     InstructorRepository instructorRepository;
@@ -26,14 +24,20 @@ public class InstructorServiceImpl implements InstructorService{
     }
 
     @Override
-    public Instructor findById(int theId) {
-        Optional<Instructor> result =  instructorRepository.findById(theId);
+    public Instructor findById(String theId) {
+        int id;
+        try {
+            id = Integer.parseInt(theId);
+        } catch (NumberFormatException ex) {
+            throw new InstructorNotFoundException("Instructor Id cannot be a string.");
+        }
+        Optional<Instructor> result =  instructorRepository.findById(id);
         Instructor instructor = null;
         if (result.isPresent()) {
             instructor = result.get();
         }
         else {
-            throw new InstructorNotFoundException("Did not find instructor id - " + theId);
+            throw new InstructorNotFoundException("Cannot found instructor with id - " + id);
         }
         return instructor;
     }

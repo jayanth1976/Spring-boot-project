@@ -7,7 +7,7 @@ import java.util.List;
 public interface InstructorService {
     public List<Instructor> findAll();
 
-    public Instructor findById(int theId);
+    public Instructor findById(String theId);
 
     public void save(Instructor theInstructor);
 

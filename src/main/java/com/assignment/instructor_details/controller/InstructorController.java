@@ -40,7 +40,7 @@ public class InstructorController {
     }
 
     @GetMapping("/showFormForUpdate")
-    public String update(@RequestParam("instructorId") int theId, Model theModel) {
+    public String update(@RequestParam("instructorId") String theId, Model theModel) {
         Instructor theInstructor = instructorService.findById(theId);
         theModel.addAttribute("instructor", theInstructor);
         return instructorFormView;

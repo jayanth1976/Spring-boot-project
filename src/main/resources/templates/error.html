@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/error.css}"/>
+</head>
+<body>
+    <p class="not-found">404</p>
+    <p class="msg">Oops! Something went wrong.</p>
+    <p th:text="${errorMsg}" class="error-msg"></p>
+    <button class="btn"
+            onClick="window.location.href='/instructors/list';return false;">Home
+    </button>
+</body>
+</html>
