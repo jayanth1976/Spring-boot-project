@@ -2,6 +2,7 @@ package com.assignment.instructor_details.service;
 
 import com.assignment.instructor_details.dao.CourseRepository;
 import com.assignment.instructor_details.entity.Course;
+import com.assignment.instructor_details.error_handling.CourseNotFoundException;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,7 +72,7 @@ class CourseServiceImplTest {
         Course course = new Course();
         when(courseRepository.findById(1)).thenReturn(Optional.of(course));
 
-        Course result = courseServiceImpl.findById(1);
+        Course result = courseServiceImpl.findById("1");
 
         verify(courseRepository).findById(1);
         assertEquals(course, result);
@@ -82,11 +83,20 @@ class CourseServiceImplTest {
         when(courseRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(RuntimeException.class, () -> {
-            courseServiceImpl.findById(1);
+            courseServiceImpl.findById("1");
         });
 
         verify(courseRepository).findById(1);
     }
+    @Test
+    void testFindById_WhenIdIsString_ThrowsCourseNotFoundException() {
+        String id = "abc";
+
+        assertThrows(CourseNotFoundException.class, () -> {
+            courseServiceImpl.findById(id);
+        }, "Course Id cannot be string.");
+    }
+
 
 
 }

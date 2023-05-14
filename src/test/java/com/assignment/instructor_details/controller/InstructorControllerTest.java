@@ -82,7 +82,7 @@ class InstructorControllerTest {
 
     @Test
     void update() {
-        int theId = 7;
+        String theId = "7";
         when(instructorService.findById(theId)).thenReturn(instructor);
 
         String view = instructorController.update(theId,theModel);

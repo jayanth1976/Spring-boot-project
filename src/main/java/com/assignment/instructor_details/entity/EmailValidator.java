@@ -12,12 +12,11 @@ import java.util.regex.Pattern;
 public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 
 
+
     private static final String EMAIL_PATTERN =
-            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+            "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
     private Pattern pattern;
-    private Matcher matcher;
 
     @Override
     public void initialize(ValidEmail constraintAnnotation) {
@@ -26,6 +25,7 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
+        Matcher matcher;
         if (email == null) {
             return false;
         }

@@ -3,17 +3,16 @@ package com.assignment.instructor_details.service;
 import com.assignment.instructor_details.dao.InstructorRepository;
 import com.assignment.instructor_details.entity.Instructor;
 
+
+import com.assignment.instructor_details.error_handling.InstructorNotFoundException;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +59,7 @@ class InstructorServiceImplTest {
         Instructor instructor = new Instructor();
         when(instructorRepository.findById(1)).thenReturn(Optional.of(instructor));
 
-        Instructor result = instructorServiceImpl.findById(1);
+        Instructor result = instructorServiceImpl.findById("1");
 
         verify(instructorRepository).findById(1);
         assertEquals(instructor, result);
@@ -71,7 +70,7 @@ class InstructorServiceImplTest {
         when(instructorRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(RuntimeException.class, () -> {
-            instructorServiceImpl.findById(1);
+            instructorServiceImpl.findById("1");
         });
 
         verify(instructorRepository).findById(1);
@@ -90,6 +89,15 @@ class InstructorServiceImplTest {
     }
 
     @Test
+    void testFindById_WhenIdIsString_ThrowsInstructorNotFoundException() {
+        String id = "abc";
+
+        assertThrows(InstructorNotFoundException.class, () -> {
+            instructorServiceImpl.findById(id);
+        }, "Instructor Id cannot be string.");
+    }
+
+    @Test
     void deleteById() {
         int instructorIdToDelete = 1;
 
@@ -97,4 +105,5 @@ class InstructorServiceImplTest {
 
         verify(instructorRepository).deleteById(instructorIdToDelete);
     }
+
 }

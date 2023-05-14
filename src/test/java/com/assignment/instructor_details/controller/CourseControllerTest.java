@@ -5,6 +5,7 @@ import com.assignment.instructor_details.entity.Instructor;
 import com.assignment.instructor_details.service.CourseService;
 import com.assignment.instructor_details.service.InstructorService;
 
+
 import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,6 +48,7 @@ class CourseControllerTest {
 
     Course course = new Course();
 
+
     @InjectMocks
     private CourseController courseController;
 
@@ -58,7 +60,6 @@ class CourseControllerTest {
     @Test
     void testAddCourse() {
         int theId = 1;
-        System.out.println(theModel);
         String result = courseController.addCourse(theModel, theId);
         assertEquals("course/course-form", result);
         verify(theModel).addAttribute(eq("course"), any(Course.class));
@@ -67,7 +68,7 @@ class CourseControllerTest {
 
     @Test
     void testSaveCourseWithoutValidation(){
-        int theId = 7;
+        String theId = "7";
         when(bindingResult.hasErrors()).thenReturn(false);
         when(instructorService.findById(theId)).thenReturn(instructor);
 
@@ -81,7 +82,7 @@ class CourseControllerTest {
 
     @Test
     void testSaveCourseWithValidation(){
-        int theId = 7;
+        String theId = "7";
         when(bindingResult.hasErrors()).thenReturn(true);
 
         String result = courseController.saveCourse(course, bindingResult, theId,theModel);
@@ -93,7 +94,7 @@ class CourseControllerTest {
 
     @Test
     void testInstructorCourseList(){
-        int theId = 1;
+        String theId = "1";
         when(instructorService.findById(theId)).thenReturn(instructor);
         String result = courseController.instructorCourseList(theModel,theId);
 
@@ -122,13 +123,18 @@ class CourseControllerTest {
 
     @Test
     void testUpdate(){
-        int instructorId = 13;
-        int courseId = 2;
-        when(courseService.findById(anyInt())).thenReturn(course);
+        int courseId = 1;
+        int instructorId = 2;
+        Course course = new Course();
+        course.setId(courseId);
+        Instructor instructor = new Instructor();
+        instructor.setId(instructorId);
+        course.setInstructor(instructor);
+        when(courseService.findById("1")).thenReturn(course);
 
-        String view = courseController.update(instructorId, courseId, theModel);
+        String view = courseController.update("1", theModel);
 
-        verify(courseService).findById(courseId);
+        verify(courseService).findById("1");
         verify(theModel).addAttribute("course", course);
         verify(theModel).addAttribute("instructorId", instructorId);
         assertEquals("course/course-form", view);

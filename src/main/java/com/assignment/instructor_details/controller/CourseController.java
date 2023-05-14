@@ -23,11 +23,12 @@ public class CourseController {
     CourseService courseService;
 
     String courseFormView = "course/course-form";
+    String insId = "instructorId";
 
     @PostMapping("/save")
     public String saveCourse(@ModelAttribute("course") @Valid Course theCourse, BindingResult bindingResult, @RequestParam("instructorId") String theId,Model theModel){
         if (bindingResult.hasErrors()) {
-            theModel.addAttribute("instructorId",theId);
+            theModel.addAttribute(insId,theId);
             return courseFormView;
         }
         else {
@@ -42,15 +43,15 @@ public class CourseController {
     public String addCourse(Model theModel, @RequestParam("instructorId") int theId){
         Course theCourse = new Course();
         theModel.addAttribute("course",theCourse);
-        theModel.addAttribute("instructorId",theId);
+        theModel.addAttribute(insId,theId);
         return courseFormView;
     }
 
     @GetMapping("/showFormForUpdate")
-    public String update(@RequestParam("instructorId") int instructorId,@RequestParam("courseId") String courseId, Model theModel) {
+    public String update(@RequestParam("courseId") String courseId, Model theModel) {
         Course theCourse = courseService.findById(courseId);
         theModel.addAttribute("course", theCourse);
-        theModel.addAttribute("instructorId",instructorId);
+        theModel.addAttribute(insId,theCourse.getInstructor().getId());
         return courseFormView;
     }
 

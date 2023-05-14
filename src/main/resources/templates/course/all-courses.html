@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <h1 class="heading">Faculty Manager</h1>
+    <h1 class="heading">Courses Offered</h1>
     <div class="table-content">
         <table>
             <thead>
@@ -26,11 +26,11 @@
                 <td th:text="${coursesEach.instructor.firstName}"/>
                 <td>
                     <a th:href="@{/courses/delete(courseId=${coursesEach.id})}"
-                       onclick="if (!(confirm('Are you sure you want to delete this Instructor?'))) return false"
+                       onclick="if (!(confirm('Are you sure you want to delete this Course?'))) return false"
                     >
                         <i class="fa-sharp fa-solid fa-trash" title="Delete instructor"></i> |
                     </a>
-                    <a th:href="@{/courses/showFormForUpdate(courseId=${coursesEach.id},instructorId=${coursesEach.instructor.id})}">
+                    <a th:href="@{/courses/showFormForUpdate(courseId=${coursesEach.id})}">
                         <i class="fa-solid fa-pen" title="update"></i>
                     </a>
                 </td>

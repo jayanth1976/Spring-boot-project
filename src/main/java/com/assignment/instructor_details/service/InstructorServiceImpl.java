@@ -2,7 +2,6 @@ package com.assignment.instructor_details.service;
 
 import com.assignment.instructor_details.dao.InstructorRepository;
 import com.assignment.instructor_details.entity.Instructor;
-import com.assignment.instructor_details.error_handling.CourseNotFoundException;
 import com.assignment.instructor_details.error_handling.InstructorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
